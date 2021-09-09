@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Library</title>
+		<link rel="stylesheet" href="styles/styles.css" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@500&family=Mukta:wght@300&family=Poppins&display=swap"
+			rel="stylesheet"
+		/>
+		<!-- font-family: 'Azeret Mono', monospace;
+            font-family: 'Mukta', sans-serif;
+            font-family: 'Poppins', sans-serif; -->
+		<script src="jav.js" defer></script>
+	</head>
+	<body>
+		<header>
+			<div class="logo">
+				<h1>LIBRARY</h1>
+			</div>
+			<nav>
+				<div class="login">
+					<a href="#">Login</a>
+				</div>
+			</nav>
+		</header>
+		<main>
+			<div class="upperMainSection">
+				<button class="addBook">Add book</button>
+			</div>
+			<div class="lowerMainSection"></div>
+		</main>
+		<footer>
+			<p class="copyright">Copyright @Gaurav 2021</p>
+		</footer>
+		<div class="formContainer">
+			<form id="newBookForm">
+				<h1>Add new Book</h1>
+				<input type="text" placeholder="Title" name="title" />
+				<input type="text" placeholder="Author" name="author" />
+				<input
+					type="number"
+					value="0"
+					step="1"
+					min="0"
+					max="100"
+					name="pages"
+					placeholder="Pages"
+				/>
+				<div id="checkBox">
+					<label for="isRead">Have you read it?</label>
+					<input
+						type="checkbox"
+						name="isRead"
+						id="isRead"
+						value="off"
+					/>
+				</div>
+				<input id="formSubmitButton" type="submit" />
+			</form>
+		</div>
+	</body>
+</html>
