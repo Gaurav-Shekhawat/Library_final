@@ -1,9 +1,10 @@
 class Book {
-	constructor(title, author, pages, isRead) {
+	constructor(title, author, pages, isRead, date) {
 		this.title = title;
 		this.author = author;
 		this.pages = pages;
 		this.isRead = isRead;
+		this.date = date;
 	}
 }
 
@@ -17,6 +18,9 @@ class Library {
 			return;
 		} else {
 			this.bookSet.push(book);
+			const bookset = JSON.parse(localStorage.getItem("bookset"));
+			bookset.push(book);
+			localStorage.setItem("bookset", JSON.stringify(bookset));
 		}
 	}
 }
@@ -28,27 +32,38 @@ function formRefresh(form) {
 	form.isRead = "off";
 }
 
-function addBookToDOM() {
-	//today
-	var today = new Date();
+function addBooksToDOM() {
+	const bookset = JSON.parse(localStorage.getItem("bookset"));
+	bookset.forEach((book) => {
+		const newBookDiv = document.createElement("div");
+		newBookDiv.classList.add("book");
+		newBookDiv.innerHTML = `
+        <h2>${book.title}</h2>
+        <p>Author: ${book.author}</p>
+        <p>Number of pages: ${book.pages}</p>
+        <p>Date Published : ${book.date}</p>
+        <div>
+        <label for="selectmenu">Have you read it? </label>
+        <select id = "selectmenu">
+            <option name = "isRead">Yes</option>
+            <option name = "isRead">No</option>
+        </select>
+        </div>
+    `;
+		const lowerMainSection = document.querySelector(".lowerMainSection");
+		lowerMainSection.appendChild(newBookDiv);
+	});
+	const book = bookset[bookset.length - 1];
+}
 
-	var date =
-		today.getFullYear() +
-		"-" +
-		(today.getMonth() + 1) +
-		"-" +
-		today.getDate();
-
-	//today end
-
-	const book = library.bookSet[library.bookSet.length - 1];
+function addBookToDOM(book) {
 	const newBookDiv = document.createElement("div");
 	newBookDiv.classList.add("book");
 	newBookDiv.innerHTML = `
         <h2>${book.title}</h2>
         <p>Author: ${book.author}</p>
         <p>Number of pages: ${book.pages}</p>
-        <p>Date Published : ${date}</p>
+        <p>Date Published : ${book.date}</p>
         <div>
         <label for="selectmenu">Have you read it? </label>
         <select id = "selectmenu">
@@ -62,7 +77,11 @@ function addBookToDOM() {
 }
 
 const library = new Library();
-localStorage.setItem("library", library);
+if (!localStorage.getItem("bookset")) {
+	localStorage.setItem("bookset", JSON.stringify(library.bookSet));
+} else {
+	addBooksToDOM();
+}
 
 const addBook = document.querySelector(".addBook");
 addBook.addEventListener("click", () => {
@@ -77,15 +96,22 @@ newBookForm.addEventListener("submit", function (event) {
 	const author = this.author.value;
 	const pages = this.pages.value;
 	const isRead = this.isRead.value;
+	let today = new Date();
+
+	let date =
+		today.getFullYear() +
+		"-" +
+		(today.getMonth() + 1) +
+		"-" +
+		today.getDate();
 	formRefresh(newBookForm);
 
-	const newBook = new Book(title, author, pages, isRead);
+	const newBook = new Book(title, author, pages, isRead, date);
+	addBookToDOM(newBook);
 	library.addBook(newBook);
 
 	const formContainer = document.querySelector(".formContainer");
 	formContainer.style.display = "none";
-
-	addBookToDOM();
 
 	return false;
 });
