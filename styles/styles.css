@@ -66,11 +66,21 @@ main .lowerMainSection {
     background-color: antiquewhite;
     font-size: 18px;
     margin: 0 20px;
-    margin-bottom: 40px; }
+    margin-bottom: 40px;
+    position: relative; }
     main .lowerMainSection .book div {
       width: 100%;
       display: flex;
       justify-content: space-between; }
+    main .lowerMainSection .book .cross {
+      font-family: sans-serif;
+      font-weight: 50%;
+      color: #666;
+      position: absolute;
+      font-size: 30px;
+      top: 2%;
+      left: 90%;
+      cursor: pointer; }
 
 .formContainer {
   position: fixed;

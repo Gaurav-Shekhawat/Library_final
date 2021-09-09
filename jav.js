@@ -34,10 +34,11 @@ function formRefresh(form) {
 
 function addBooksToDOM() {
 	const bookset = JSON.parse(localStorage.getItem("bookset"));
-	bookset.forEach((book) => {
+	bookset.forEach((book, index) => {
 		const newBookDiv = document.createElement("div");
 		newBookDiv.classList.add("book");
 		newBookDiv.innerHTML = `
+        <div class= "cross"> x </div>
         <h2>${book.title}</h2>
         <p>Author: ${book.author}</p>
         <p>Number of pages: ${book.pages}</p>
@@ -50,16 +51,26 @@ function addBooksToDOM() {
         </select>
         </div>
     `;
+
 		const lowerMainSection = document.querySelector(".lowerMainSection");
 		lowerMainSection.appendChild(newBookDiv);
 	});
-	const book = bookset[bookset.length - 1];
+}
+
+function removeBook(title) {
+	let bookset = JSON.parse(localStorage.getItem("bookset"));
+	bookset = bookset.filter((book) => {
+		return book.title !== title;
+	});
+	localStorage.setItem("bookset", JSON.stringify(bookset));
 }
 
 function addBookToDOM(book) {
 	const newBookDiv = document.createElement("div");
+	console.log("hi");
 	newBookDiv.classList.add("book");
 	newBookDiv.innerHTML = `
+        <div class= "cross"> x </div>
         <h2>${book.title}</h2>
         <p>Author: ${book.author}</p>
         <p>Number of pages: ${book.pages}</p>
@@ -114,4 +125,12 @@ newBookForm.addEventListener("submit", function (event) {
 	formContainer.style.display = "none";
 
 	return false;
+});
+
+const allCrossButtons = document.querySelectorAll(".cross");
+allCrossButtons.forEach((crossButton) => {
+	crossButton.addEventListener("click", function () {
+		removeBook(this.parentElement.querySelector("h2").textContent);
+		this.parentElement.remove();
+	});
 });
