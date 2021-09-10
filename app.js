@@ -52,6 +52,13 @@ function addBooksToDOM() {
         </div>
     `;
 
+		const crossButton = newBookDiv.querySelector(".cross");
+
+		crossButton.addEventListener("click", function () {
+			removeBook(this.parentElement.querySelector("h2").textContent);
+			this.parentElement.remove();
+		});
+
 		const lowerMainSection = document.querySelector(".lowerMainSection");
 		lowerMainSection.appendChild(newBookDiv);
 	});
@@ -82,6 +89,13 @@ function addBookToDOM(book) {
         </select>
         </div>
     `;
+
+	const crossButton = newBookDiv.querySelector(".cross");
+	crossButton.addEventListener("click", function () {
+		removeBook(this.parentElement.querySelector("h2").textContent);
+		this.parentElement.remove();
+	});
+
 	const lowerMainSection = document.querySelector(".lowerMainSection");
 	lowerMainSection.appendChild(newBookDiv);
 }
@@ -126,10 +140,10 @@ newBookForm.addEventListener("submit", function (event) {
 	return false;
 });
 
-const allCrossButtons = document.querySelectorAll(".cross");
-allCrossButtons.forEach((crossButton) => {
-	crossButton.addEventListener("click", function () {
-		removeBook(this.parentElement.querySelector("h2").textContent);
-		this.parentElement.remove();
-	});
-});
+// const allCrossButtons = document.querySelectorAll(".cross");
+// allCrossButtons.forEach((crossButton) => {
+// 	crossButton.addEventListener("click", function () {
+// 		removeBook(this.parentElement.querySelector("h2").textContent);
+// 		this.parentElement.remove();
+// 	});
+// });
