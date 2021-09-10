@@ -67,7 +67,6 @@ function removeBook(title) {
 
 function addBookToDOM(book) {
 	const newBookDiv = document.createElement("div");
-	console.log("hi");
 	newBookDiv.classList.add("book");
 	newBookDiv.innerHTML = `
         <div class= "cross"> x </div>
