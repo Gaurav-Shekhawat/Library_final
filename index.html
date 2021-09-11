@@ -38,9 +38,22 @@
 		<div class="formContainer">
 			<form id="newBookForm">
 				<h1>Add new Book</h1>
-				<input type="text" placeholder="Title" name="title" />
-				<input type="text" placeholder="Author" name="author" />
 				<input
+					type="text"
+					placeholder="Title"
+					name="title"
+					required
+					minlength="1"
+				/>
+				<input
+					type="text"
+					placeholder="Author"
+					name="author"
+					required
+					minlength="1"
+				/>
+				<input
+					required
 					type="number"
 					value="0"
 					step="1"
