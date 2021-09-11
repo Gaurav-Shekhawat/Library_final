@@ -142,6 +142,32 @@ main {
 			&:focus-visible {
 				outline: none;
 			}
+
+			&[type="text"],
+			&[type="number"] {
+				&:invalid:required {
+					border: 1px solid black;
+				}
+				&:valid {
+					border: 2px solid lightgreen;
+				}
+
+				&:invalid:focus {
+					border: 2px solid red;
+				}
+			}
+		}
+
+		.formValidation {
+			input[type="text"],
+			input[type="number"] {
+				&:valid {
+					border: 2px solid lightgreen;
+				}
+				&:invalid {
+					border: 2px solid red;
+				}
+			}
 		}
 
 		#checkBox {
